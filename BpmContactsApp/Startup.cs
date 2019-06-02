@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using BpmContactsApp.Models.HttpServices;
 namespace BpmContactsApp
 {
     public class Startup
@@ -24,9 +24,10 @@ namespace BpmContactsApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-         
-
-
+            //services.AddTransient<CookieManager>();
+            //services.AddTransient<ServicesOptions>();
+            //services.AddTransient<HttpAuthorization>();
+            //services.AddTransient<HttpDataService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

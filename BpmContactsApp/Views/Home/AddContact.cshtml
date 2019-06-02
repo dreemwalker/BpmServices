@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if(ViewBag.Error)
+{
+    <h3 class="text-danger">Ошибка добавления</h3>
+}
+<form method="post">
+    <div class="form-group">
+        <input type="text" class="form-control" id="ContactId" name="Id" hidden="hidden">
+    </div>
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" id="Name" name="Name">
+
+        <label for="MobilePhone">MobilePhone</label>
+        <input type="text" class="form-control" id="MobilePhone" name="MobilePhone">
+
+        <label for="Dear">Dear</label>
+        <input type="text" class="form-control" id="Dear" name="Dear">
+
+        <label for="JobTitle">JobTitle</label>
+        <input type="text" class="form-control" id="JobTitle" name="JobTitle">
+
+        <label for="BirthDate">BirthDate</label>
+        <input type="date" class="form-control" id="BirthDate" name="BirthDate">
+
+    </div>
+
+    <button type="submit" class="btn btn-secondary">Submit</button>
+    <a class="btn btn-secondary" href="~/Home">Back</a>
+
+</form>

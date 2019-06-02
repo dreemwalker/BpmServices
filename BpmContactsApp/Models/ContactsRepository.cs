@@ -5,17 +5,19 @@ using System.Threading.Tasks;
 using BpmContactsApp.Models.HttpServices;
 namespace BpmContactsApp.Models
 {
-    public class ContactsHttpRepository : IRepository<Contact>
+    public class ContactsRepository : IRepository<Contact>
     {
         private IDataService _dataService;
-        private AppContext _contextBpm;
-        public ContactsHttpRepository(IDataService dataService)
+      
+        public ContactsRepository(IDataService dataService)
         {
             _dataService = dataService;
         }
-        public void Create(Contact item)
+        public bool Create(Contact item)
         {
-            _dataService.InsertContact(item);
+            if (_dataService.InsertContact(item))
+                return true;
+            return false;
         }
 
         public void Delete(string id)

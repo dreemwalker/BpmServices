@@ -1,18 +1,25 @@
 ﻿@{
     Layout = "_Layout";
 }
-<div>
-    <form>
-        <div class="form-group">
-            <label for="UserName">Username</label>
-            <input type="text" class="form-control" id="UserName" placeholder="Enter username">
 
-        </div>
-        <div class="form-group">
-            <label for="UserPassword">Password</label>
-            <input type="password" class="form-control" id="UserPassword" placeholder="Enter password">
-        </div>
+<div>Введите имя пользователя и пароль:</div>
+@if (!ViewBag.AuthLabel)
+{
+    <h4 class="text-danger">Неверное имя пользователя или пароль</h4>
+}
+    <div>
+        @ViewBag.Message
+        <form method="post">
+            <div class="form-group">
+                <label for="UserName">Username</label>
+                <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Enter username">
 
-        <button type="submit" class="btn btn-secondary">Submit</button>
-    </form>
-</div>
+            </div>
+            <div class="form-group">
+                <label for="UserPassword">Password</label>
+                <input type="password" class="form-control" id="UserPassword" name="UserPassword" placeholder="Enter password">
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+    </div>

@@ -9,13 +9,21 @@ namespace BpmContactsApp.Models.HttpServices
     {
       
         public static CookieContainer bpmCookieContainer;
-        public static bool CheckAuthCookie()
+        public  bool CheckAuthCookies()
         {
             if (bpmCookieContainer != null)
             {
                 return true;
             }
             return false;
+        }
+        public  void DeleteAuthCookies()
+        {
+            bpmCookieContainer = null;
+        }
+        public CookieContainer GetAuthCookies()
+        {
+            return bpmCookieContainer;
         }
     }
 }

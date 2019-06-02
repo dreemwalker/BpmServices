@@ -9,8 +9,9 @@
     <div class="col">
         <h3>Contacts</h3>
     </div>
-   
+       <a class="btn btn-secondary" href="Home/AddContact">Add Contact</a>
 </div>
+
 <table class="table">
     <thead class="thead-light">
         <tr>
@@ -26,7 +27,33 @@
         </tr>
     </thead>
     <tbody>
+
+        @foreach (Contact contact in Model)
+    {
         <tr>
+            <th scope="row"></th>
+            <td hidden="hidden">@contact.Id</td>
+            <td>@contact.Name</td>
+            <td>@contact.MobilePhone</td>
+            <td>@contact.JobTitle</td>
+            @if (contact.BirthDate.ToShortDateString() != "01.01.0001")
+                {
+                    <td>@contact.BirthDate.ToShortDateString()</td>
+                }
+            else
+                {
+
+                    <td></td>
+                }
+            <td>
+                <a href="#">Delete</a>
+                <a href="#">Edit</a>
+            </td>
+
+        </tr>
+
+}
+        @*<tr>
             <th scope="row">1</th>
             <td hidden="hidden">Id</td>
             <td>Name</td>
@@ -38,7 +65,7 @@
                 <a href="#">Edit</a>
             </td>
 
-        </tr>
+        </tr>*@
 
 
     </tbody>

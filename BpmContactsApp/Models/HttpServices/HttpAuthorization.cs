@@ -13,20 +13,20 @@ namespace BpmContactsApp.Models.HttpServices
 
         //перенести в конфиг
         // Строка адреса BPMonline сервиса OData.
-        private const string serverUri = "http://shedko.beesender.com//0/ServiceModel/EntityDataService.svc/";
-        private const string authServiceUtri = "http://shedko.beesender.com//ServiceModel/AuthService.svc/Login";
+        private static string _serverUri = "http://shedko.beesender.com//0/ServiceModel/EntityDataService.svc/";
+        private static string _authServiceUtri = "http://shedko.beesender.com//ServiceModel/AuthService.svc/Login";
 
-        // Ссылки на пространства имен XML.
-        private static readonly XNamespace ds = "http://schemas.microsoft.com/ado/2007/08/dataservices";
-        private static readonly XNamespace dsmd = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata";
-        private static readonly XNamespace atom = "http://www.w3.org/2005/Atom";
+     
 
-
-       
+       public HttpAuthorization(ServicesOptions options)
+        {
+            _serverUri = options.serverUri;
+            _authServiceUtri = options.authServiceUtri;
+        }
         public static CookieContainer LogIn(string userName, string userPassword)
         {
             // Создание запроса на аутентификацию.
-            var authRequest = HttpWebRequest.Create(authServiceUtri) as HttpWebRequest;
+            var authRequest = HttpWebRequest.Create(_authServiceUtri) as HttpWebRequest;
             authRequest.Method = "POST";
             authRequest.ContentType = "application/json";
             var bpmCookieContainer = new CookieContainer();
@@ -48,7 +48,7 @@ namespace BpmContactsApp.Models.HttpServices
             }
             // Получение ответа от сервера. Если аутентификация проходит успешно, в объекте bpmCookieContainer будут 
             // помещены cookie, которые могут быть использованы для последующих запросов.
-            //var response = (HttpWebResponse)authRequest.GetResponse();
+           
             ResponseStatus status = null;
             using (var response = (HttpWebResponse)authRequest.GetResponse())
             {

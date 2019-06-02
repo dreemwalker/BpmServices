@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Net;
 namespace BpmContactsApp.Models.HttpServices
 {
     public interface IDataService
@@ -10,7 +10,7 @@ namespace BpmContactsApp.Models.HttpServices
         
         List<Contact> GetContacts();
         Contact GetContactByID(string id);
-        void InsertContact(Contact contact);
+        bool InsertContact(Contact contact);
         void DeleteContact(string id);
         void UpdateContact(Contact contact);
     }
