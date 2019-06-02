@@ -7,5 +7,6 @@ namespace BpmContactsApp.Models
 {
     public class AppContext
     {
+        public List<Contact> contacts { get; set; }
     }
 }

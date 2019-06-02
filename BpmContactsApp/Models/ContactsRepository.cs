@@ -2,37 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using BpmContactsApp.Models.HttpServices;
 namespace BpmContactsApp.Models
 {
     public class ContactsHttpRepository : IRepository<Contact>
     {
+        private IDataService _dataService;
         private AppContext _contextBpm;
-
+        public ContactsHttpRepository(IDataService dataService)
+        {
+            _dataService = dataService;
+        }
         public void Create(Contact item)
         {
-            throw new NotImplementedException();
+            _dataService.InsertContact(item);
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
-            throw new NotImplementedException();
+            _dataService.DeleteContact(id);
         }
 
-        public Contact GetItem(int id)
+        public Contact GetItem(string id)
         {
-            throw new NotImplementedException();
+            return _dataService.GetContactByID(id);
         }
 
         public IEnumerable<Contact> GetItems()
         {
-            throw new NotImplementedException();
+            return _dataService.GetContacts();
         }
 
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public void Update(Contact item)
         {
