@@ -24,10 +24,11 @@ namespace BpmContactsApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddTransient<CookieManager>();
-            //services.AddTransient<ServicesOptions>();
-            //services.AddTransient<HttpAuthorization>();
-            //services.AddTransient<HttpDataService>();
+            services.AddTransient<CookieManager>();
+            //    services.AddTransient<ServicesOptions>();
+            ServicesOptions servicesOptions = new ServicesOptions();
+            services.AddTransient(BpmAuthorization => new HttpAuthorization(servicesOptions));
+            services.AddTransient<IDataService>(BpmHttpService=>new HttpDataService(servicesOptions, CookieManager.bpmCookieContainer));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
