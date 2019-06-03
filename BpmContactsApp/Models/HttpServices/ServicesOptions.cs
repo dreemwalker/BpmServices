@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Xml;
-using System.Xml.Linq;
-using Newtonsoft.Json;
-namespace BpmContactsApp.Models.HttpServices
+﻿namespace BpmContactsApp.Models.HttpServices
 {
     public class ServicesOptions
     {

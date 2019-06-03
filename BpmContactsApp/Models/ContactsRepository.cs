@@ -39,7 +39,7 @@ namespace BpmContactsApp.Models
 
         public void Update(Contact item)
         {
-            throw new NotImplementedException();
+            _dataService.UpdateContact(item);
         }
        
 

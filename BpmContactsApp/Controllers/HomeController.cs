@@ -12,8 +12,16 @@ namespace BpmContactsApp.Controllers
 {
     public class HomeController : Controller
     {
-
-        
+        [HttpGet]
+        public IActionResult DeleteContact(string id)
+        {
+            ServicesOptions servicesOptions = new ServicesOptions();
+            CookieManager cookieManager = new CookieManager();
+            IDataService dataService = new HttpDataService(servicesOptions, cookieManager.GetAuthCookies());
+            IRepository<Contact> repositoryHttp = new ContactsRepository(dataService);
+            repositoryHttp.Delete(id);
+            return Redirect("~/Home");
+        }
         public IActionResult Index()
         {
 
@@ -49,10 +57,30 @@ namespace BpmContactsApp.Controllers
              return View();
 
         }
-        [HttpPost]
-        public IActionResult EditContact()
+        [HttpGet]
+        public IActionResult EditContact(string id)
         {
-            return View();
+            string contactId = id;
+            ServicesOptions servicesOptions = new ServicesOptions();
+            CookieManager cookieManager = new CookieManager();
+            IDataService dataService = new HttpDataService(servicesOptions, cookieManager.GetAuthCookies());
+            IRepository<Contact> repositoryHttp = new ContactsRepository(dataService);
+
+            Contact contactForEdit= repositoryHttp.GetItem(contactId);
+            return View(contactForEdit);
+        }
+        [HttpPost]
+        public IActionResult EditContact(Contact contact)
+        {
+            
+            ServicesOptions servicesOptions = new ServicesOptions();
+            CookieManager cookieManager = new CookieManager();
+            IDataService dataService = new HttpDataService(servicesOptions, cookieManager.GetAuthCookies());
+            IRepository<Contact> repositoryHttp = new ContactsRepository(dataService);
+
+            repositoryHttp.Update(contact);
+            return Redirect("~/Home");
+            // return View();
         }
         public IActionResult AddContact()
         {
@@ -67,7 +95,7 @@ namespace BpmContactsApp.Controllers
             IDataService dataService = new HttpDataService(servicesOptions, cookieManager.GetAuthCookies());
             IRepository<Contact> repositoryHttp = new ContactsRepository(dataService);
 
-            if(  repositoryHttp.Create(contact))
+            if(repositoryHttp.Create(contact))
                 return Redirect("~/Home");
             ViewBag.Error = true;
             return View();

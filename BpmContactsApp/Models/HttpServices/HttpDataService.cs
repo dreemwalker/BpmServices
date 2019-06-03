@@ -25,6 +25,10 @@ namespace BpmContactsApp.Models.HttpServices
             _authUri = options.authServiceUtri;
             _bpmCookieContainer = AuthCookies;
         }
+        public void SetAuthCookies(CookieContainer AuthCookies)
+        {
+            _bpmCookieContainer = AuthCookies;
+        }
         public void DeleteContact(string id)
         {
             // Id записи объекта, который необходимо удалить.
@@ -115,7 +119,8 @@ namespace BpmContactsApp.Models.HttpServices
                           new XElement(ds + "MobilePhone", contact.MobilePhone),
                           new XElement(ds + "Dear", contact.Dear),
                           new XElement(ds + "JobTitle", contact.JobTitle),
-                          new XElement(ds + "BirthDate", contact.BirthDate.ToShortDateString()));
+                          new XElement(ds + "BirthDate", contact.BirthDate.ToString("yyyy-MM-dd"))
+                          );
 
             XElement entry = new XElement(atom + "entry",
                         new XElement(atom + "content",
@@ -168,14 +173,21 @@ namespace BpmContactsApp.Models.HttpServices
                 entry.WriteTo(writer);
             }
             // Получение ответа от сервиса о результате выполнения операции.
-            using (WebResponse response = request.GetResponse())
+            try
             {
-                if (((HttpWebResponse)response).StatusCode == HttpStatusCode.Created)
+                using (WebResponse response = request.GetResponse())
                 {
-                    return true;
+                    if (((HttpWebResponse)response).StatusCode == HttpStatusCode.Created)
+                    {
+                        return true;
+                    }
+
                 }
-               
             }
+            catch(Exception e) {
+              
+            }
+           
             return false;
         }
 
