@@ -6,13 +6,14 @@ namespace BpmContactsApp.Controllers
 {
     public class HomeController : Controller
     {
-      
+        private HttpAuthorization _httpAuthorization;
         private CookieManager _cookieManager;
         private IRepository<Contact> _repository;
-        public HomeController (IDataService dataService, CookieManager cookieManager)
+        public HomeController (IDataService dataService, CookieManager cookieManager, HttpAuthorization httpAuthorization)
         {
 
             _cookieManager = cookieManager;
+            _httpAuthorization = httpAuthorization;
             _repository = new ContactsRepository(dataService);
            
         }
@@ -46,7 +47,7 @@ namespace BpmContactsApp.Controllers
         [HttpPost]
         public IActionResult Login(string UserName, string UserPassword)
         {
-            CookieContainer cookies = HttpAuthorization.LogIn(UserName, UserPassword);
+            CookieContainer cookies = _httpAuthorization.LogIn(UserName, UserPassword);
             if (cookies != null)
             {
                 CookieManager.bpmCookieContainer = cookies;

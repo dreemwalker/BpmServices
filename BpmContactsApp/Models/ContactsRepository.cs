@@ -1,8 +1,5 @@
-﻿using System;
+﻿using BpmContactsApp.Models.HttpServices;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BpmContactsApp.Models.HttpServices;
 namespace BpmContactsApp.Models
 {
     public class ContactsRepository : IRepository<Contact>

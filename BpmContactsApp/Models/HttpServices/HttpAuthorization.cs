@@ -17,7 +17,7 @@ namespace BpmContactsApp.Models.HttpServices
             _serverUri = options.serverUri;
             _authServiceUtri = options.authServiceUtri;
         }
-        public static CookieContainer LogIn(string userName, string userPassword)
+        public  CookieContainer LogIn(string userName, string userPassword)
         {
            
             var authRequest = HttpWebRequest.Create(_authServiceUtri) as HttpWebRequest;
@@ -62,7 +62,7 @@ namespace BpmContactsApp.Models.HttpServices
 
               //  return status.Message
             }
-            return null;//нет ответа от сервера
+            return null;
 
 
         }

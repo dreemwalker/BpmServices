@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BpmContactsApp.Models.HttpServices
+﻿namespace BpmContactsApp.Models.HttpServices
 {
     public class ResponseStatus
     {
