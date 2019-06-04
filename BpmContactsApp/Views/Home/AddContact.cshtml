@@ -1,33 +1,39 @@
 ﻿
 @{
 }
-@if(ViewBag.Error)
+
+@if (ViewBag.Error)
 {
     <h3 class="text-danger">Ошибка добавления</h3>
 }
-<form method="post">
+<form method="post" name="contactForm" onsubmit="return validateForm()">
     <div class="form-group">
         <input type="text" class="form-control" id="ContactId" name="Id" hidden="hidden">
     </div>
     <div class="form-group">
         <label for="Name">Name</label>
         <input type="text" class="form-control" id="Name" name="Name">
+        <div id="FormNameError" class="text-danger small"></div>
 
-        <label for="MobilePhone">MobilePhone</label>
+
+        <label for="MobilePhone">Mobile Phone</label>
         <input type="text" class="form-control" id="MobilePhone" name="MobilePhone">
+        <div id="FormNumberError" class="text-danger small"></div>
 
         <label for="Dear">Dear</label>
         <input type="text" class="form-control" id="Dear" name="Dear">
 
-        <label for="JobTitle">JobTitle</label>
+        <label for="JobTitle">Job Title</label>
         <input type="text" class="form-control" id="JobTitle" name="JobTitle">
 
-        <label for="BirthDate">BirthDate</label>
-        <input type="date" class="form-control" id="BirthDate" name="BirthDate">
-
+        <label for="BirthDate">Birth Date</label>
+        @*<input type="date" class="form-control" id="BirthDate" name="BirthDate">*@
+        <input type="text" class="form-control" id="BirthDate" name="BirthDate" maxlength="10">
+        <label id="FormDateError" class="text-danger small"></label>
     </div>
 
     <button type="submit" class="btn btn-secondary">Submit</button>
     <a class="btn btn-secondary" href="~/Home">Back</a>
 
 </form>
+<script src="~/js/ValidateForms.js" defer></script>

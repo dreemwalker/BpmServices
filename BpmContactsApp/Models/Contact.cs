@@ -10,5 +10,12 @@ namespace BpmContactsApp.Models
         public string Dear { get; set; }
         public string JobTitle { get; set; }
         public DateTime BirthDate { get; set; } 
+        public string getStringDate()
+        {
+            if (BirthDate != DateTime.MinValue)
+                return BirthDate.ToString("yyyy-MM-dd");
+            else
+                return "";
+        }
     }
 }

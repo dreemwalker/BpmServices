@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IO;
 using System.Net;
 using System.Xml;
 using System.Xml.Linq;
-using Newtonsoft.Json;
 namespace BpmContactsApp.Models.HttpServices
 {
-   
+
     public class HttpDataService : IDataService
     {
         private CookieContainer _bpmCookieContainer;
@@ -40,10 +38,15 @@ namespace BpmContactsApp.Models.HttpServices
             request.CookieContainer = _bpmCookieContainer;
             request.Method = "DELETE";
             // Получение ответа от сервися о результате выполненя операции.
-            using (WebResponse response = request.GetResponse())
+            try
             {
-                // Обработка результата выполнения операции.
+                using (WebResponse response = request.GetResponse())
+                {
+
+                }
             }
+            catch { }
+      
         }
 
         public Contact GetContactByID(string id)
@@ -119,7 +122,7 @@ namespace BpmContactsApp.Models.HttpServices
                           new XElement(ds + "MobilePhone", contact.MobilePhone),
                           new XElement(ds + "Dear", contact.Dear),
                           new XElement(ds + "JobTitle", contact.JobTitle),
-                          new XElement(ds + "BirthDate", contact.BirthDate.ToString("yyyy-MM-dd"))
+                          new XElement(ds + "BirthDate", contact.getStringDate())
                           );
 
             XElement entry = new XElement(atom + "entry",
