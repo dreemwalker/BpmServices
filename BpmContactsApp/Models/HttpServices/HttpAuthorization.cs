@@ -6,10 +6,9 @@ namespace BpmContactsApp.Models.HttpServices
     public class HttpAuthorization
     {
 
-        //перенести в конфиг
-        // Строка адреса BPMonline сервиса OData.
-        private static string _serverUri = "http://shedko.beesender.com//0/ServiceModel/EntityDataService.svc/";
-        private static string _authServiceUtri = "http://shedko.beesender.com//ServiceModel/AuthService.svc/Login";
+      
+        private static string _serverUri;
+        private static string _authServiceUtri;
 
      
 
@@ -20,16 +19,15 @@ namespace BpmContactsApp.Models.HttpServices
         }
         public static CookieContainer LogIn(string userName, string userPassword)
         {
-            // Создание запроса на аутентификацию.
+           
             var authRequest = HttpWebRequest.Create(_authServiceUtri) as HttpWebRequest;
             authRequest.Method = "POST";
             authRequest.ContentType = "application/json";
             var bpmCookieContainer = new CookieContainer();
-            // Включение использования cookie в запросе.
+         
             authRequest.CookieContainer = bpmCookieContainer;
             using (var requestStream = authRequest.GetRequestStream())
             {
-                // Запись в поток запроса учетных данных пользователя BPMonline и дополнительных параметров запроса.
                 using (var writer = new StreamWriter(requestStream))
                 {
                     writer.Write(@"{
@@ -41,8 +39,7 @@ namespace BpmContactsApp.Models.HttpServices
                                 }");
                 }
             }
-            // Получение ответа от сервера. Если аутентификация проходит успешно, в объекте bpmCookieContainer будут 
-            // помещены cookie, которые могут быть использованы для последующих запросов.
+          
            
             ResponseStatus status = null;
             using (var response = (HttpWebResponse)authRequest.GetResponse())
@@ -60,7 +57,6 @@ namespace BpmContactsApp.Models.HttpServices
             {
                 if (status.Code == 0)
                 {
-                 //   CookieManager.bpmCookieContainer = bpmCookieContainer;
                     return bpmCookieContainer;
                 }
 
